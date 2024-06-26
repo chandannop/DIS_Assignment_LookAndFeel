@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - Bicycle Site</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin-bottom: 30px;
+        }
+        .card {
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .modal-dialog {
+            max-width: 80%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Bicycle Site</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="aboutus.html">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="managesales.html">Manage Sales</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="analytics.html">Analytics</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mt-5">
+        <h1>Data Analytics</h1>
+
+        <!-- Summary Cards -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-header">Total Sales</div>
+                    <div class="card-body">
+                        <h5 class="card-title">1200</h5>
+                        <p class="card-text">Bicycles sold this year</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-header">Top Selling Month</div>
+                    <div class="card-body">
+                        <h5 class="card-title">May</h5>
+                        <p class="card-text">180 Bicycles sold</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-header">Most Popular Type</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Hybrid Bicycles</h5>
+                        <p class="card-text">450 Bicycles sold</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-white bg-danger mb-3">
+                    <div class="card-header">Highest Sales Region</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Europe</h5>
+                        <p class="card-text">500 Bicycles sold</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <h2>Monthly Bicycle Sales</h2>
+        <div class="chart-container">
+            <canvas id="salesBarChart"></canvas>
+        </div>
+        
+        <h2>Sales Trend Over the Year</h2>
+        <div class="chart-container">
+            <canvas id="salesLineChart"></canvas>
+        </div>
+        
+        <h2>Distribution of Bicycle Types Sold</h2>
+        <div class="chart-container">
+            <canvas id="salesPieChart"></canvas>
+        </div>
+
+        <h2>Sales by Region</h2>
+        <div class="chart-container">
+            <canvas id="salesDoughnutChart"></canvas>
+        </div>
+        
+        <h2>Yearly Sales Comparison</h2>
+        <div class="chart-container">
+            <canvas id="salesRadarChart"></canvas>
+        </div>
+        
+        <h2>Monthly Sales Comparison</h2>
+        <div class="chart-container">
+            <canvas id="salesPolarAreaChart"></canvas>
+        </div>
+    </main>
+
+    <footer class="text-center mt-5">
+        <p>&copy; Sai Chandan Prabhakara 2024</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Bar Chart for Monthly Sales
+        const barCtx = document.getElementById('salesBarChart').getContext('2d');
+        const salesBarChart = new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                datasets: [{
+                    label: '# of Bicycle Sales',
+                    data: [50, 70, 90, 110, 180, 150, 130, 120, 140, 160, 100, 80],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 20 // Ensures whole numbers only
+                        }
+                    }
+                }
+            }
+        });
+
+        // Line Chart for Sales Trend Over the Year
+        const lineCtx = document.getElementById('salesLineChart').getContext('2d');
+        const salesLineChart = new Chart(lineCtx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                datasets: [{
+                    label: '# of Bicycle Sales',
+                    data: [50, 70, 90, 110, 180, 150, 130, 120, 140, 160, 100, 80],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 20 // Ensures whole numbers only
+                        }
+                    }
+                }
+            }
+        });
+
+        // Pie Chart for Distribution of Bicycle Types Sold
+        const pieCtx = document.getElementById('salesPieChart').getContext('2d');
+        const salesPieChart = new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Road Bicycles', 'Mountain Bicycles', 'Hybrid Bicycles', 'Electric Bicycles'],
+                datasets: [{
+                    label: '# of Bicycle Sales',
+                    data: [300, 300, 450, 150],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        // Doughnut Chart for Sales by Region
+        const doughnutCtx = document.getElementById('salesDoughnutChart').getContext('2d');
+        const salesDoughnutChart = new Chart(doughnutCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['North America', 'Europe', 'Asia', 'South America', 'Africa'],
+                datasets: [{
+                    label: '# of Bicycle Sales',
+                    data: [400, 500, 200, 50, 50],
+                    backgroundColor: [
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 205, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(54, 162, 235, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        // Radar Chart for Yearly Sales Comparison
+        const radarCtx = document.getElementById('salesRadarChart').getContext('2d');
+        const salesRadarChart = new Chart(radarCtx, {
+            type: 'radar',
+            data: {
+                labels: ['Road Bicycles', 'Mountain Bicycles', 'Hybrid Bicycles', 'Electric Bicycles'],
+                datasets: [{
+                    label: '2023 Sales',
+                    data: [150, 200, 100, 50],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }, {
+                    label: '2024 Sales',
+                    data: [300, 300, 450, 150],
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 50 // Ensures whole numbers only
+                        }
+                    }
+                }
+            }
+        });
+
+        // Polar Area Chart for Monthly Sales Comparison
+        const polarAreaCtx = document.getElementById('salesPolarAreaChart').getContext('2d');
+        const salesPolarAreaChart = new Chart(polarAreaCtx, {
+            type: 'polarArea',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                datasets: [{
+                    label: '# of Bicycle Sales',
+                    data: [50, 70, 90, 110, 180, 150, 130, 120, 140, 160, 100, 80],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(99, 255, 132, 0.2)',
+                        'rgba(162, 54, 235, 0.2)',
+                        'rgba(206, 255, 86, 0.2)',
+                        'rgba(192, 75, 192, 0.2)',
+                        'rgba(102, 153, 255, 0.2)',
+                        'rgba(159, 255, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(99, 255, 132, 1)',
+                        'rgba(162, 54, 235, 1)',
+                        'rgba(206, 255, 86, 1)',
+                        'rgba(192, 75, 192, 1)',
+                        'rgba(102, 153, 255, 1)',
+                        'rgba(159, 255, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Sales - Bicycle Site</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            margin-bottom: 30px;
+        }
+
+        h1, h2 {
+            color: #6f42c1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        h1:hover, h2:hover {
+            transform: translateY(-10px);
+        }
+
+        p, ul {
+            color: #495057;
+        }
+
+        .img-thumbnail {
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .img-thumbnail:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-icons {
+            margin-top: 10px;
+        }
+
+        .social-icons a {
+            color: #6f42c1;
+            font-size: 20px;
+            margin: 0 8px;
+            transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+
+        .social-icons a:hover {
+            color: #343a40;
+            transform: translateY(-5px);
+        }
+
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
+        footer p {
+            margin: 0;
+            display: inline;
+        }
+
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Bicycle Site</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="aboutus.html">About Me</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="managesales.html">Manage Sales</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="analytics.html">Analytics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contactus.html">Contact Me</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mt-5">
+        <h1>Manage Sales</h1>
+        <form id="sales-form">
+            <div class="mb-3">
+                <label for="bicycle-type" class="form-label">Bicycle Type:</label>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="bicycleDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Select Bicycle Type
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="bicycleDropdown">
+                        <li><a class="dropdown-item" href="#" onclick="selectBicycleType('Road Bicycles', 1000)">Road Bicycles</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="selectBicycleType('Mountain Bicycles', 1200)">Mountain Bicycles</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="selectBicycleType('Hybrid Bicycles', 850)">Hybrid Bicycles</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="selectBicycleType('Electric Bicycles', 1600)">Electric Bicycles</a></li>
+                    </ul>
+                </div>
+                <input type="hidden" id="bicycle-type" name="bicycle-type" required>
+                <input type="hidden" id="bicycle-price" name="bicycle-price" required>
+            </div>
+            <div class="mb-3">
+                <label for="sale-date" class="form-label">Sale Date:</label>
+                <input type="date" id="sale-date" name="sale-date" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="customization-requests" class="form-label">Requests for More Customization:</label>
+                <input type="text" id="customization-requests" name="customization-requests" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="quantity" class="form-label">Quantity:</label>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="quantityDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Select Quantity
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="quantityDropdown">
+                        <li><a class="dropdown-item" href="#" onclick="selectQuantity(1)">1</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="selectQuantity(2)">2</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="selectQuantity(3)">3</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="selectQuantity(4)">4</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="selectQuantity(5)">5</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="manualQuantity()">Enter Manually</a></li>
+                    </ul>
+                </div>
+                <input type="hidden" id="quantity" name="quantity" required>
+                <input type="number" id="manual-quantity" class="form-control mt-2" placeholder="Enter Quantity" style="display: none;" min="1">
+            </div>
+            <div class="mb-3">
+                <label for="total-cost" class="form-label">Total Cost:</label>
+                <input type="text" id="total-cost" name="total-cost" class="form-control" readonly>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Sale</button>
+        </form>
+
+        <div id="sales-records" class="mt-5">
+            <h2>Sales Records</h2>
+            <div class="mb-3">
+                <label for="filter-type" class="form-label">Filter by Bicycle Type:</label>
+                <select id="filter-type" class="form-control">
+                    <option value="">All</option>
+                    <option value="Road Bicycles">Road Bicycles</option>
+                    <option value="Mountain Bicycles">Mountain Bicycles</option>
+                    <option value="Hybrid Bicycles">Hybrid Bicycles</option>
+                    <option value="Electric Bicycles">Electric Bicycles</option>
+                </select>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Bicycle Type</th>
+                        <th scope="col">Sale Date</th>
+                        <th scope="col">Customization Requests</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total Cost</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="records-table">
+                    <!-- Records will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="text-center mt-5">
+        <p>&copy; Sai Chandan 2024</p>
+        <div class="social-icons">
+            <a href="https://linkedin.com        /in/chandannss/" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" style="width:20px; height:20px;">
+            </a>
+            <a href="mailto:saichandanreddy267@gmail.com" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email" style="width:20px; height:20px;">
+            </a>
+            <a href="https://www.instagram.com/chandann.reddy?igshid=NGpxMnZ5ZHVkcW41&utm_source=qr" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" style="width:20px; height:20px;">
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        function selectBicycleType(type, price) {
+            document.getElementById('bicycleDropdown').innerText = type;
+            document.getElementById('bicycle-type').value = type;
+            document.getElementById('bicycle-price').value = price;
+            calculateTotalCost();
+        }
+
+        function selectQuantity(quantity) {
+            document.getElementById('quantityDropdown').innerText = quantity;
+            document.getElementById('quantity').value = quantity;
+            document.getElementById('manual-quantity').style.display = 'none';
+            document.getElementById('manual-quantity').value = '';
+            calculateTotalCost();
+        }
+
+        function manualQuantity() {
+            document.getElementById('quantityDropdown').innerText = 'Enter Manually';
+            document.getElementById('quantity').value = '';
+            document.getElementById('manual-quantity').style.display = 'block';
+        }
+
+        document.getElementById('manual-quantity').addEventListener('input', function() {
+            document.getElementById('quantity').value = this.value;
+            calculateTotalCost();
+        });
+
+        function calculateTotalCost() {
+            const price = document.getElementById('bicycle-price').value;
+            const quantity = document.getElementById('quantity').value;
+            if (price && quantity) {
+                const totalCost = price * quantity;
+                document.getElementById('total-cost').value = `$${totalCost.toLocaleString()}`;
+            } else {
+                document.getElementById('total-cost').value = '';
+            }
+        }
+
+        document.getElementById('sales-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const saleType = document.getElementById('bicycle-type').value;
+            const saleDate = document.getElementById('sale-date').value;
+            const quantity = document.getElementById('quantity').value;
+            const totalCost = document.getElementById('total-cost').value;
+            const customizationRequests = document.getElementById('customization-requests').value;
+
+            const saleRecord = {
+                saleType,
+                saleDate,
+                quantity,
+                totalCost,
+                customizationRequests
+            };
+
+            let sales = JSON.parse(localStorage.getItem('sales')) || [];
+            sales.push(saleRecord);
+            localStorage.setItem('sales', JSON.stringify(sales));
+
+            appendSaleRecord(saleRecord);
+            document.getElementById('sales-form').reset();
+            document.getElementById('bicycleDropdown').innerText = 'Select Bicycle Type';
+            document.getElementById('quantityDropdown').innerText = 'Select Quantity';
+            document.getElementById('manual-quantity').style.display = 'none';
+            document.getElementById('total-cost').value = '';
+        });
+
+        function appendSaleRecord(record) {
+            const table = document.getElementById('records-table');
+            const row = table.insertRow();
+            row.dataset.type = record.saleType;
+            row.innerHTML = `
+                <td>${record.saleType}</td>
+                <td>${record.saleDate}</td>
+                <td>${record.customizationRequests}</td>
+                <td>${record.quantity}</td>
+                <td>${record.totalCost}</td>
+                <td>
+                    <button class="btn btn-warning btn-sm" onclick="editSale(this)">Edit</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteSale(this)">Delete</button>
+                </td>
+            `;
+        }
+
+        document.getElementById('filter-type').addEventListener('change', function() {
+            const filterType = this.value;
+            const rows = document.querySelectorAll('#records-table tr');
+            rows.forEach(row => {
+                if (filterType === '' || row.dataset.type === filterType) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        function editSale(button) {
+            const row = button.parentNode.parentNode;
+            const saleType = row.cells[0].innerText;
+            const saleDate = row.cells[1].innerText;
+            const customizationRequests = row.cells[2].innerText;
+            const quantity = row.cells[3].innerText;
+            const totalCost = row.cells[4].innerText;
+
+            document.getElementById('bicycleDropdown').innerText = saleType;
+            document.getElementById('bicycle-type').value = saleType;
+            document.getElementById('sale-date').value = saleDate;
+            document.getElementById('customization-requests').value = customizationRequests;
+            document.getElementById('quantityDropdown').innerText = quantity;
+            document.getElementById('quantity').value = quantity;
+            document.getElementById('total-cost').value = totalCost;
+
+            const price = document.querySelector(`.dropdown-item[onclick*="${saleType}"]`).getAttribute('onclick').match(/\d+/)[0];
+            document.getElementById('bicycle-price').value = price;
+
+            if (quantity > 5) {
+                document.getElementById('manual-quantity').style.display = 'block';
+                document.getElementById('manual-quantity').value = quantity;
+            } else {
+                document.getElementById('manual-quantity').style.display = 'none';
+                document.getElementById('manual-quantity').value = '';
+            }
+
+            row.remove();
+        }
+
+        function deleteSale(button) {
+            const row = button.parentNode.parentNode;
+            const saleType = row.cells[0].innerText;
+            const saleDate = row.cells[1].innerText;
+            const quantity = row.cells[3].innerText;
+            
+            let sales = JSON.parse(localStorage.getItem('sales')) || [];
+            sales = sales.filter(sale => sale.saleType !== saleType || sale.saleDate !== saleDate || sale.quantity !== quantity);
+            localStorage.setItem('sales', JSON.stringify(sales));
+
+            row.remove();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const sales = JSON.parse(localStorage.getItem('sales')) || [];
+            sales.forEach(appendSaleRecord);
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+
