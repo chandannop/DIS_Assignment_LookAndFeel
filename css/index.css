@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: black;
+  }
+  
+  header {
+    background-color: none;
+    color: whitesmoke;
+    padding: 1em 0;
+    text-align: center;
+  }
+  
+  nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  nav ul li {
+    display: inline;
+    margin: 0 10px;
+  }
+  
+  nav ul li a {
+    color: whitesmoke;
+    text-decoration: none;
+  }
+  
+  nav ul li a.active {
+    font-weight: bold;
+    text-decoration: underline;
+  }
+  
+  .home-page {
+    background-image: url('img/vac11.jpg'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .hero {
+    margin-bottom: 50px;
+  }
+  .hero h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: white;
+    animation: highlight-animation 2s infinite;
+  }
+  
+  @keyframes highlight-animation {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+  
+  .hero .highlight {
+    font-weight: bold;
+  }
+  
+  .explore-button {
+    background-color: #f36021;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    cursor: pointer;
+    font-size: 1em;
+    border-radius: 5px;
+  }
+  
+  .explore-button:hover {
+    background-color: red;
+  }
+  
+  footer {
+    color: black;
+    text-align: center;
+    padding: 1em 0;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    background: none;
+  }
+  
