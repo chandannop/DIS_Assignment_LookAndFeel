@@ -66,27 +66,5 @@ body {
     font-weight: bold;
   }
   
-  .explore-button {
-    background-color: #f36021;
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    cursor: pointer;
-    font-size: 1em;
-    border-radius: 5px;
-  }
   
-  .explore-button:hover {
-    background-color: red;
-  }
-  
-  footer {
-    color: black;
-    text-align: center;
-    padding: 1em 0;
-    position: relative;
-    width: 100%;
-    bottom: 0;
-    background: none;
-  }
   
